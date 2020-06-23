@@ -37,7 +37,7 @@ function login( $post ) {
   $error_msg      = "Email ou mot de passe incorrect";
 
   if( $userData && sizeof( $userData ) != 0 ):
-    if( $user->getPassword() == $userData['password'] ):
+    if( hash('sha512',(hash('sha256', $user->getPassword()).strrev(hash('ripemd256', $user->getEmail())) == $userData['password'] ))):
 
       // Set session
       $_SESSION['user_id'] = $userData['id'];
