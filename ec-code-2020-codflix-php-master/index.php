@@ -4,6 +4,7 @@ require_once( 'controller/homeController.php' );
 require_once( 'controller/loginController.php' );
 require_once( 'controller/signupController.php' );
 require_once( 'controller/mediaController.php' );
+require_once( 'controller/historicController.php' );
 
 /**************************
 * ----- HANDLE ACTION -----
@@ -46,7 +47,24 @@ else:
             // call function to see more details
           $media->showMoreDetails( $_GET['media']);
 
-      }else{
+      }else if(isset( $_GET['redirect'])){
+          switch( $_GET['redirect']):
+
+              case 'index':
+                  mediaPage();
+              break;
+
+              case 'historic':
+                  showHistoric();
+
+                  require('view/historicView.php');
+              break;
+
+          endswitch;
+      }else if( isset($_GET['deleteHistoric'])){
+          deleteHistoric($_GET['deleteHistoric']);
+      }
+      else{
           mediaPage();
       }
   else:

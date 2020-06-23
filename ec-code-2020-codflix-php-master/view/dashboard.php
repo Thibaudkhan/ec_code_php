@@ -18,7 +18,8 @@
         <h2 class="title">Bienvenue</h2>
         <div class="sidebar-menu">
           <ul>
-            <li class="active"><a href="/CodFlix/">Médias</a></li>
+            <li class="active"><a href="index.php?redirect=index">Médias</a></li>
+            <li class=""><a href="index.php?redirect=historic">Médias</a></li>
             <li><a href="#">Nous contacter</a></li>
             <li><a href="index.php?action=logout">Me déconnecter</a></li>
           </ul>
