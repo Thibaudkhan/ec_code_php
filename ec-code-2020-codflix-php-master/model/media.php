@@ -93,8 +93,8 @@ class Media {
     // Open database connection
     $db   = init_db();
 
-    $req  = $db->prepare( "SELECT * FROM media WHERE title = ? ORDER BY release_date DESC" );
-    $req->execute( array( '%' . $title . '%' ));
+    $req  = $db->prepare( "SELECT * FROM media ORDER BY release_date DESC" );
+    $req->execute();
 
     // Close databse connection
     $db   = null;
@@ -102,5 +102,20 @@ class Media {
     return $req->fetchAll();
 
   }
+
+    public static function detailsPages($title,$whatDistinct ="",$nbSeason=1)
+    {
+        $db   = init_db();
+        $req  = !empty($whatDistinct) ?  $db->prepare( "SELECT DISTINCT($whatDistinct) FROM media WHERE title Like ? && season_series >= ?" )
+        : $db->prepare( "SELECT * FROM media WHERE title Like ? && season_series=?" );
+        $req->execute( array( '%' . $title . '%', $nbSeason ));
+
+
+        // Close databse connection
+        $db   = null;
+
+        return $req->fetchAll();
+  }
+
 
 }

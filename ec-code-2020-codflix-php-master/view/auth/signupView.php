@@ -45,18 +45,6 @@
       <div class="col-md-6 full-height">
         <div class="auth-container">
           <h1>Bienvenue sur Cod'Flix !</h1>
-            <form method="post" action="index.php?action=verification" class="custom-form">
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <input type="submit" name="Valider" class="btn btn-block bg-red" />
-                        </div>
-                        <div class="col-md-6">
-                            <a href="index.php?action=login" class="btn btn-block bg-blue">Connexion</a>
-                        </div>
-                    </div>
-                </div>
-            </form>
         </div>
       </div>
     </div>

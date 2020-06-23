@@ -41,7 +41,14 @@ else:
   $user_id = isset( $_SESSION['user_id'] ) ? $_SESSION['user_id'] : false;
 
   if( $user_id ):
-    mediaPage();
+      if(isset( $_GET['media'])){
+          $media = new MediaController();
+            // call function to see more details
+          $media->showMoreDetails( $_GET['media']);
+
+      }else{
+          mediaPage();
+      }
   else:
     homePage();
   endif;
