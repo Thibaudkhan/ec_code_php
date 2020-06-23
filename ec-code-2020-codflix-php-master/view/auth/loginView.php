@@ -40,6 +40,7 @@
       <div class="col-md-6 full-height">
         <div class="auth-container">
           <h1>Heureux de vous revoir !</h1>
+
         </div>
       </div>
     </div>
