@@ -28,7 +28,11 @@
         </form>
     </div>
 </div>
-
+<div class="container-fluid mb-3">
+    <?php foreach( $TimeForSeries as $times ){
+   echo "Temps de visonage pour tous les épisodes de la série réunis <b>".$times['timeSum']."</b>";
+    }?>
+</div>
 <div class="media-list">
     <?php foreach( $medias as $media ): ?>
         <a class="item" href="index.php?media=<?= $media['title']; ?>">
@@ -47,6 +51,7 @@
         </a>
     <?php endforeach; ?>
 </div>
+
 
 
 <?php $content = ob_get_clean(); ?>

@@ -106,7 +106,7 @@ class Media {
     public static function detailsPages($title,$whatDistinct ="",$nbSeason=1)
     {
         $db   = init_db();
-        $req  = !empty($whatDistinct) ?  $db->prepare( "SELECT DISTINCT($whatDistinct) FROM media WHERE title Like ? && season_series >= ?" )
+        $req  = !empty($whatDistinct) ?  $db->prepare( "SELECT $whatDistinct FROM media WHERE title Like ? && season_series >= ?" )
         : $db->prepare( "SELECT * FROM media WHERE title Like ? && season_series=?" );
         $req->execute( array( '%' . $title . '%', $nbSeason ));
 
