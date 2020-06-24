@@ -9,10 +9,14 @@ require_once( 'model/media.php' );
 function mediaPage() {
 
   $search = isset( $_GET['title'] ) ? $_GET['title'] : null;
-  $medias = Media::showMedias( $search );
+  $medias = Media::showMedias(  );
   $AllType = Media::getTypeOfShow();
 
   require('view/mediaListView.php');
+
+}
+
+function changeStyle(){
 
 }
 

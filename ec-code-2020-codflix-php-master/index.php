@@ -6,6 +6,7 @@ require_once( 'controller/signupController.php' );
 require_once( 'controller/mediaController.php' );
 require_once( 'controller/historicController.php' );
 require_once( 'controller/FilterController.php' );
+require_once( 'controller/contactController.php' );
 
 /**************************
 * ----- HANDLE ACTION -----
@@ -56,6 +57,10 @@ else:
                   mediaPage();
               break;
 
+              case 'contact':
+                  showContact();
+              break;
+
               case 'historic':
                   showHistoric();
 
@@ -73,6 +78,8 @@ else:
                   break;
 
           endswitch;
+      }else if(isset($_GET['sendMail'])){
+          sendMail();
       }
       else{
           mediaPage();

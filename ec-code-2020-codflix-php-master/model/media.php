@@ -88,7 +88,7 @@ class Media {
   * -------- GET LIST --------
   ***************************/
 
-  public static function showMedias( $title ) {
+  public static function showMedias( ) {
 
     // Open database connection
     $db   = init_db();
