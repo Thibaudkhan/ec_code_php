@@ -47,6 +47,7 @@
             <div class="title"><?= $media['title']; ?></div>
             <div class="d-flex justify-content-between" style="text-decoration: none;color: #fff;">
                 <p class="p-2" ><?= $media['short_description']; ?></p>
+                <p class="p-2" ><?= $media['name_of_episode']; ?></p>
                 <p class="p-2" ><?= $media['time_of_show']; ?></p>
             </div>
 

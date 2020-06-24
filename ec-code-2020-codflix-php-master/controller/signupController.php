@@ -26,12 +26,14 @@ function signupPage()
         require('view/homeView.php');
     endif;
 
-    if (!empty($_POST['email']) && !empty($_POST['password'])) {
+    if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['password_confirm'])) {
         if (strlen($_POST['password']) >= 8) {
             if (preg_match('/[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/', $_POST['password'])) {
                 $email = $_POST['email'];
                 $createUser->setEmail($email);
-                $createUser->setPassword(hash('sha512',hash('sha256', $_POST['password']) . strrev(hash('ripemd256', $_POST['email']))));
+
+                $createUser->setPassword(User::myHash( $_POST['password'],$_POST['email']),User::myHash( $_POST['password_confirm'],$_POST['email']));
+
                 $createUser->createUser();
             } else {
                 echo "<script>alert('Veuillez avoir un mot de passe de minimum des chiffres et des lettres ')</script>";
@@ -41,7 +43,7 @@ function signupPage()
         }
 
     } else {
-        echo "<script>alert('Veuillez compléter tous les champs')</script>";
+        //echo "<script>alert('Veuillez compléter tous les champs')</script>";
     }
 }
 

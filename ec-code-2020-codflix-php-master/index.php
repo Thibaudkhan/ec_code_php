@@ -7,6 +7,7 @@ require_once( 'controller/mediaController.php' );
 require_once( 'controller/historicController.php' );
 require_once( 'controller/FilterController.php' );
 require_once( 'controller/contactController.php' );
+require_once( 'controller/profileController.php' );
 
 /**************************
 * ----- HANDLE ACTION -----
@@ -71,6 +72,11 @@ else:
 
               break;
 
+              case 'profile':
+                  showProfilePage();
+
+              break;
+
           endswitch;
       }else if( isset($_GET['deleteHistoric'])){
           deleteHistoric($_GET['deleteHistoric']);
@@ -88,6 +94,24 @@ else:
           endswitch;
       }else if(isset($_GET['sendMail'])){
           sendMail();
+      }else if(isset($_GET['changeProfile'])){
+          switch( $_GET['changeProfile']):
+
+              case 'changePassword':
+                  changePassword();
+                  break;
+
+
+              case 'changeEmail':
+                  changeEmail();
+                  break;
+
+              case 'deleteAccount':
+                  deleteUser();
+
+                  break;
+
+          endswitch;
       }
       else{
           mediaPage();

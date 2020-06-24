@@ -34,6 +34,7 @@ class User {
   public function setEmail( $email ) {
 
     if ( !filter_var($email, FILTER_VALIDATE_EMAIL)):
+        echo "<script> alert('Cette adresse mail existe déjà')</script>";
       throw new Exception( 'Email incorrect' );
     endif;
 
@@ -44,6 +45,7 @@ class User {
   public function setPassword( $password, $password_confirm = false ) {
 
     if( $password_confirm && $password != $password_confirm ):
+        echo "<script> alert('Vos mots de passe ne correspondent pas')</script>";
       throw new Exception( 'Vos mots de passes sont différents' );
     endif;
 
@@ -183,7 +185,40 @@ EOT;
   }
 
 
+    /**
+     * @param $password
+     * @param $email
+     * @return string
+     */
+    public static function myHash($password, $email)
+    {
+        return hash('sha512',hash('sha256', $password) . strrev(hash('ripemd256',$email)));
+    }
 
+
+    public function changeProfile($query,$password){
+        $db   = init_db();
+        $id = $_SESSION['user_id'];
+        $req  = $db->prepare( $query );
+        $req->execute( array($password,$id));
+
+        // Close databse connection
+        $db   = null;
+
+        return $req->fetch();
+    }
+
+    public function deleteUser(){
+        $db   = init_db();
+        $id = $_SESSION['user_id'];
+        $req  = $db->prepare( "DELETE FROM history Where  history.user_id = ? ; DELETE FROM user Where user.id =?  ;" );
+        $req->execute( array($id,$id));
+
+        // Close databse connection
+        $db   = null;
+
+        return $req->fetch();
+    }
 
 
 

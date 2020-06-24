@@ -35,15 +35,16 @@ function login( $post ) {
   $userData       = $user->getUserByEmail();
 
   $error_msg      = "Email ou mot de passe incorrect";
-
   if( $userData && sizeof( $userData ) != 0 ):
-    if( hash('sha512',(hash('sha256', $user->getPassword()).strrev(hash('ripemd256', $user->getEmail())) == $userData['password'] ))):
-
+    if( User::myHash($user->getPassword(),$user->getEmail())== $userData['password'] ):
       // Set session
-      $_SESSION['user_id'] = $userData['id'];
+        $_SESSION['user_id'] = $userData['id'];
+        $_SESSION['user_email'] = $userData['email'];
+        $_SESSION['user_password'] =  $userData['password'];
+
 
       header( 'location: index.php ');
-    endif;
+      endif;
   endif;
 
   require('view/auth/loginView.php');

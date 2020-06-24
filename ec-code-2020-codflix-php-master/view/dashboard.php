@@ -21,6 +21,7 @@
             <li class="active"><a href="index.php?redirect=index">Médias</a></li>
             <li class=""><a href="index.php?redirect=historic">Historique</a></li>
             <li><a href="index.php?redirect=contact">Nous contacter</a></li>
+            <li><a href="index.php?redirect=profile">Mon profil</a></li>
             <li><a href="index.php?action=logout">Me déconnecter</a></li>
           </ul>
         </div>
