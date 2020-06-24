@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
 
 <script>
-    function btn_click(operator) {
+    function btn_click() {
         var searchValue = document.getElementById("search").value;
         var typeOfgenre = document.getElementById("genre");
         var strTypeOfgenre = typeOfgenre.options[typeOfgenre.selectedIndex].value;

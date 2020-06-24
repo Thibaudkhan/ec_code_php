@@ -82,6 +82,10 @@ else:
                   resultFitlerAsc();
                   break;
 
+              case 'searchSeason':
+                  chooseSeason();
+                  break;
+
           endswitch;
       }else if(isset($_GET['sendMail'])){
           sendMail();

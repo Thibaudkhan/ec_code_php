@@ -7,6 +7,16 @@ Class FilterController{
 }
 
 
+function chooseSeason(){
+    $season = $_POST['season'];
+    //$title = $_POST['title'];
+    //echo "ok". $title;
+    $medias = Media::getShowBySeason($season);
+    //var_dump($medias[0]['title']);
+    require('view/components/componentMediaViewDetails.php');
+
+}
+
 function resultFitlerAsc(){
     $symbol = 'LIKE';
     $symbolGenre = '=';
@@ -14,11 +24,11 @@ function resultFitlerAsc(){
     $genre = $_POST['genreValue'];
     $releaseDate = $_POST['releaseDate'];
     $typeOfMedia = $_POST['typeOfMedia'];
-    $typeOfgenre = $_POST['nbGenre'];
+    $typeOfGenre = $_POST['nbGenre'];
     if($typeOfMedia == "Tout"){
         $symbol = '!=';
     }
-    if($typeOfgenre == 0){
+    if($typeOfGenre == 0){
         $symbolGenre = '>';
     }
 

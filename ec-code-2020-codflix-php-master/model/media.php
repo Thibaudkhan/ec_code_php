@@ -112,9 +112,10 @@ class Media {
     public static function detailsPages($title,$whatDistinct ="",$nbSeason=1)
     {
         $db   = init_db();
-        $req  = !empty($whatDistinct) ?  $db->prepare( "SELECT $whatDistinct FROM media WHERE title Like ? && season_series >= ?" )
-        : $db->prepare( "SELECT * FROM media WHERE title Like ? && season_series=?" );
-        $req->execute( array( '%' . $title . '%', $nbSeason ));
+
+            $req  = !empty($whatDistinct) ?  $db->prepare( "SELECT $whatDistinct FROM media WHERE title Like ? && season_series >= ?" )
+                : $db->prepare( "SELECT * FROM media WHERE title Like ? && season_series=?" );
+            $req->execute( array( '%' . $title . '%', $nbSeason ));
 
 
         // Close databse connection
@@ -144,6 +145,17 @@ class Media {
 
         $req  = $db->prepare( "SELECT * FROM genre " );
         $req->execute();
+
+        // Close databse connection
+        $db   = null;
+
+        return $req->fetchAll();
+    }
+
+    public static function getShowBySeason($nbSeason){
+        $db   = init_db();
+        $req  = $db->prepare( "SELECT * FROM media  where season_series =?  " );
+        $req->execute(array($nbSeason));
 
         // Close databse connection
         $db   = null;

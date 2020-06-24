@@ -1,30 +1,40 @@
 <?php ob_start(); ?>
 
+<script>
+    function btn_click() {
+        var title = document.getElementById("title").value;
+        //alert(title);
+        var season = document.getElementById("season");
+        var strseason = season.options[season.selectedIndex].value;
+        $("#tableResult").load("index.php?filter=searchSeason",{
+            season: strseason
+            //title: title
+        });
+    }
+</script>
 
 <div class="row">
-    <form method="post" action="">
-        <div class="form-group">
-            <label for="exampleFormControlSelect1">Example select</label>
-            <select class="form-control" id="exampleFormControlSelect1">
-                <?php
-                foreach( $distinctOptions as $option ){
-                    echo "<option>saison ".$option['season_series']."</option>";
-                }
+    <h1 id="title">Details de la page <?php echo $medias[0]['title'];?> </h1>
+    <div class="form-group">
 
-                ?>
-            </select>
-            <button type="submit" class="btn btn-block bg-red">Valider</button>
+        <label for="exampleFormControlSelect1">Example select</label>
+        <select class="form-control" id="season">
+            <?php
+            foreach( $distinctOptions as $option ){
+                echo '<option value="'.$option["season_series"].'">'.$option['season_series'].'</option>';
+            }
 
-        </div>
-    </form>
-
+            ?>
+        </select>
+        <button onclick="btn_click()" class="btn btn-block bg-red">Valider</button>
+    </div>
 </div>
 <div class="container-fluid mb-3">
     <?php foreach( $TimeForSeries as $times ){
    echo "Temps de visonage pour tous les épisodes de la série réunis <b>".$times['timeSum']."</b>";
     }?>
 </div>
-<div class="media-list">
+<div class="media-list" id="tableResult">
     <?php foreach( $medias as $media ): ?>
         <a class="item" href="index.php?media=<?= $media['id']; ?>">
             <div class="video">
