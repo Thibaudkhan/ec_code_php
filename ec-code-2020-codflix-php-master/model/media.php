@@ -88,13 +88,19 @@ class Media {
   * -------- GET LIST --------
   ***************************/
 
-  public static function showMedias( ) {
+  public static function showMedias($id = 0) {
 
     // Open database connection
     $db   = init_db();
 
-    $req  = $db->prepare( "SELECT * FROM media ORDER BY release_date DESC" );
-    $req->execute();
+    if($id > 0){
+        $req  = $db->prepare( "SELECT * FROM media WHERE id=?" );
+        $req->execute(array($id));
+    }else{
+        $req  = $db->prepare( "SELECT * FROM media ORDER BY release_date DESC" );
+        $req->execute();
+    }
+
 
     // Close databse connection
     $db   = null;

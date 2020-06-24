@@ -44,13 +44,18 @@ else:
   $user_id = isset( $_SESSION['user_id'] ) ? $_SESSION['user_id'] : false;
 
   if( $user_id ):
-      if(isset( $_GET['media'])){
-          echo "ojk bb";
+      if(isset( $_GET['detailMedia'])){
           $media = new MediaController();
             // call function to see more details
-          $media->showMoreDetails( $_GET['media']);
+          $media->showMoreDetails( $_GET['detailMedia']);
 
-      }else if(isset( $_GET['redirect'])){
+      }elseif (isset( $_GET['media'])){
+          $media = new MediaController();
+
+          $media->watchEpisode($_GET['media']);
+
+      }
+      else if(isset( $_GET['redirect'])){
           switch( $_GET['redirect']):
 
               case 'index':

@@ -52,7 +52,7 @@
 
 <div class="media-list" id="tableResult">
     <?php foreach( $medias as $media ): ?>
-        <a class="item" href="index.php?media=<?= $media['title']; ?>">
+        <a class="item" href="index.php?detailMedia=<?= $media['title']; ?>">
             <div class="video">
                 <div>
                     <iframe allowfullscreen="" frameborder="0"
