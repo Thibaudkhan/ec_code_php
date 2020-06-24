@@ -69,7 +69,6 @@ else:
               case 'historic':
                   showHistoric();
 
-                  require('view/historicView.php');
               break;
 
           endswitch;

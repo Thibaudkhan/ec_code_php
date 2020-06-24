@@ -94,7 +94,7 @@ class Media {
     $db   = init_db();
 
     if($id > 0){
-        $req  = $db->prepare( "SELECT * FROM media WHERE id=?" );
+        $req  = $db->prepare( "SELECT * FROM media WHERE id=? LIMIT 1" );
         $req->execute(array($id));
     }else{
         $req  = $db->prepare( "SELECT * FROM media ORDER BY release_date DESC" );

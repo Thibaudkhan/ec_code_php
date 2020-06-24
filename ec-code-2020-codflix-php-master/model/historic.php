@@ -1,5 +1,6 @@
 <?php
 
+require_once( 'user.php' );
 
 class historic
 {
@@ -27,7 +28,24 @@ class historic
         // Close databse connection
         $db   = null;
 
-        //return $req->fetchAll();
+        return $req->fetchAll();
+    }
+
+    public static function addToHistoric($getTheRow)
+    {
+
+        $db   = init_db();
+        $today = date("Y-m-d H:i:s");
+
+        $media_id = $getTheRow[0]['id'];
+        $user_id =  $_SESSION['user_id'];
+        $req  = $db->prepare( "INSERT INTO history(user_id, media_id, start_date, finish_date, watch_duration) VALUES (?,?,?,?,?) " );
+        $req->execute(array($user_id,$media_id,$today,$today,10));
+
+        // Close databse connection
+        $db   = null;
+
+        return $req->fetchAll();
     }
 
 }

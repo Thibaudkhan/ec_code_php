@@ -1,6 +1,7 @@
 <?php
 
 require_once( 'model/media.php' );
+require_once( 'model/historic.php' );
 
 /***************************
 * ----- LOAD HOME PAGE -----
@@ -32,6 +33,7 @@ class MediaController {
     public function watchEpisode($id)
     {
         $medias = Media::showMedias($id);
+        historic::addToHistoric($medias);
         require('view/mediaView.php');
 
     }
