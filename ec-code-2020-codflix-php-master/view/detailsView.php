@@ -2,31 +2,32 @@
 
 <script>
     function btn_click() {
-        var title = document.getElementById("title").value;
         //alert(title);
+
         var season = document.getElementById("season");
         var strseason = season.options[season.selectedIndex].value;
         $("#tableResult").load("index.php?filter=searchSeason",{
             season: strseason
-            //title: title
         });
     }
 </script>
 
 <div class="row">
-    <h1 id="title">Details de la page <?php echo $medias[0]['title'];?> </h1>
+    <h1 name="title" id="title2">Details de la page <?php echo $medias[0]['title'];?> </h1>
     <div class="form-group">
+        <form method="post" action="index.php?filter=searchSeason">
+            <input style="display: none;" name="seasonTitle" value="<?php echo $medias[0]['title'];?>" readonly>
+            <label for="exampleFormControlSelect1">Example select</label>
+            <select  name="season" class="form-control" id="season">
+                <?php
+                foreach( $distinctOptions as $option ){
+                    echo '<option value="'.$option["season_series"].'">'.$option['season_series'].'</option>';
+                }
 
-        <label for="exampleFormControlSelect1">Example select</label>
-        <select class="form-control" id="season">
-            <?php
-            foreach( $distinctOptions as $option ){
-                echo '<option value="'.$option["season_series"].'">'.$option['season_series'].'</option>';
-            }
-
-            ?>
-        </select>
-        <button onclick="btn_click()" class="btn btn-block bg-red">Valider</button>
+                ?>
+            </select>
+            <button onclick="btn_click()" class="btn btn-block bg-red">Valider</button>
+        </form>
     </div>
 </div>
 <div class="container-fluid mb-3">
@@ -44,7 +45,7 @@
                             src="<?= $media['trailer_url']; ?>" ></iframe>
                 </div>
             </div>
-            <div class="title"><?= $media['title']; ?></div>
+            <div id="title" class="title"><?= $media['title']; ?></div>
             <div class="d-flex justify-content-between" style="text-decoration: none;color: #fff;">
                 <p class="p-2" ><?= $media['short_description']; ?></p>
                 <p class="p-2" ><?= $media['name_of_episode']; ?></p>

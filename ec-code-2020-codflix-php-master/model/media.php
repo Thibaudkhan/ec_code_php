@@ -129,7 +129,7 @@ class Media {
 
         // Open database connection
         $db   = init_db();
-        $req  = $db->prepare( "SELECT * FROM media WHERE title LIKE ? && genre_id $symbolGenre ? && release_date <= ? && type $symbolType ?  " );
+        $req  = $db->prepare( "SELECT * FROM media WHERE title LIKE ? && genre_id $symbolGenre ? && release_date <= ? && type $symbolType ?  GROUP BY title" );
         $req->execute(array('%'.$title.'%',$genre,$releaseDate,'%'.$type.'%'));
 
         // Close databse connection
@@ -152,10 +152,21 @@ class Media {
         return $req->fetchAll();
     }
 
-    public static function getShowBySeason($nbSeason){
+    public static function getShowBySeason($nbSeason,$title){
         $db   = init_db();
-        $req  = $db->prepare( "SELECT * FROM media  where season_series =?  " );
-        $req->execute(array($nbSeason));
+        $req  = $db->prepare( "SELECT * FROM media  where season_series =?  && title LIKE ?" );
+        $req->execute(array($nbSeason,'%'.$title.'%'));
+
+        // Close databse connection
+        $db   = null;
+
+        return $req->fetchAll();
+    }
+
+    public static function queryApply($query){
+        $db   = init_db();
+        $req  = $db->prepare($query);
+        $req->execute();
 
         // Close databse connection
         $db   = null;

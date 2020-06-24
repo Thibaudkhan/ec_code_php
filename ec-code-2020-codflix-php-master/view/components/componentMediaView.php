@@ -1,7 +1,7 @@
 
 <div class="media-list" id="tableResultComponent" style="    width: 100%;">
     <?php foreach( $medias as $media ): ?>
-        <a class="item" href="index.php?media=<?= $media['title']; ?>">
+        <a class="item" href="index.php?detailMedia=<?= $media['title']; ?>">
             <div class="video">
                 <div>
                     <iframe allowfullscreen="" frameborder="0"
