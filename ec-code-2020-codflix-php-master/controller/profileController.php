@@ -13,7 +13,7 @@ function deleteUser(){
         if(User::myHash($pass,$_SESSION['user_email']) == $_SESSION['user_password']){
             $user->deleteUser();
         }
-    }
+    }require('view/auth/profileView.php');
 }
 
 function changePassword(){
@@ -42,7 +42,7 @@ function changePassword(){
     }
 
     echo $message;
-
+    require('view/auth/profileView.php');
 }
 
 function changeEmail(){
@@ -51,5 +51,5 @@ function changeEmail(){
         $email = $_POST['email'];
         $user->changeProfile("Update user SET email =? Where id = ?",$email);
 
-    }
+    }require('view/auth/profileView.php');
 }

@@ -50,9 +50,15 @@
     </div>
 
 
-<div class="media-list" id="tableResult">
+<div class="media-list" id="tableResult" >
     <?php foreach( $medias as $media ): ?>
-        <a class="item" href="index.php?detailMedia=<?= $media['title']; ?>">
+        <a  style="background-color: <?php
+        if($media['type'] == 'film'){
+            $value = "#001a77";
+        }elseif($media['type'] == 'série'){
+            $value = "#1f1f1f" ;
+        } echo $value ?>"
+            class="item" href="index.php?detailMedia=<?= $media['title']; ?>">
             <div class="video">
                 <div>
                     <iframe allowfullscreen="" frameborder="0"

@@ -41,8 +41,6 @@ function login( $post ) {
         $_SESSION['user_id'] = $userData['id'];
         $_SESSION['user_email'] = $userData['email'];
         $_SESSION['user_password'] =  $userData['password'];
-
-
       header( 'location: index.php ');
       endif;
   endif;
