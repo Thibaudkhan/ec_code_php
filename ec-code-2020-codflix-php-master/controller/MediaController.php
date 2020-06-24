@@ -10,7 +10,7 @@ require_once( 'model/historic.php' );
 function mediaPage() {
 
   $search = isset( $_GET['title'] ) ? $_GET['title'] : null;
-  $medias = Media::showMedias( );
+  $medias = Media::showMedias(null,"SELECT title,trailer_url,release_date,type,season_series FROM media GROUP BY title ORDER BY release_date DESC" );
   $AllType = Media::getTypeOfShow();
   require('view/mediaListView.php');
 

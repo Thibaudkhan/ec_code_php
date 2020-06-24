@@ -88,7 +88,7 @@ class Media {
   * -------- GET LIST --------
   ***************************/
 
-  public static function showMedias($id = 0) {
+  public static function showMedias($id = 0,$query = "") {
 
     // Open database connection
     $db   = init_db();
@@ -97,7 +97,7 @@ class Media {
         $req  = $db->prepare( "SELECT * FROM media WHERE id=? LIMIT 1" );
         $req->execute(array($id));
     }else{
-        $req  = $db->prepare( "SELECT * FROM media ORDER BY release_date DESC" );
+        $req  = $db->prepare( $query );
         $req->execute();
     }
 

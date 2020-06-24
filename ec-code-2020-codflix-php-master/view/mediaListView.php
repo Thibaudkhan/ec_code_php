@@ -52,13 +52,12 @@
 
 <div class="media-list" id="tableResult" >
     <?php foreach( $medias as $media ): ?>
-        <a  style="background-color: <?php
+        <a style="background-color: <?php
         if($media['type'] == 'film'){
             $value = "#001a77";
         }elseif($media['type'] == 'série'){
             $value = "#1f1f1f" ;
-        } echo $value ?>"
-            class="item" href="index.php?detailMedia=<?= $media['title']; ?>">
+        } echo $value ?>" class="item" href="index.php?detailMedia=<?= $media['title']; ?>">
             <div class="video">
                 <div>
                     <iframe allowfullscreen="" frameborder="0"
