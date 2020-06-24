@@ -5,6 +5,7 @@ require_once( 'controller/loginController.php' );
 require_once( 'controller/signupController.php' );
 require_once( 'controller/mediaController.php' );
 require_once( 'controller/historicController.php' );
+require_once( 'controller/FilterController.php' );
 
 /**************************
 * ----- HANDLE ACTION -----
@@ -43,6 +44,7 @@ else:
 
   if( $user_id ):
       if(isset( $_GET['media'])){
+          echo "ojk bb";
           $media = new MediaController();
             // call function to see more details
           $media->showMoreDetails( $_GET['media']);
@@ -63,6 +65,14 @@ else:
           endswitch;
       }else if( isset($_GET['deleteHistoric'])){
           deleteHistoric($_GET['deleteHistoric']);
+      }else if(isset( $_GET['filter'])){
+          switch( $_GET['filter']):
+
+              case 'ascSearch':
+                  resultFitlerAsc();
+                  break;
+
+          endswitch;
       }
       else{
           mediaPage();
@@ -72,3 +82,4 @@ else:
   endif;
 
 endif;
+

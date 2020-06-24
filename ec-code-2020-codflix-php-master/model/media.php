@@ -88,7 +88,7 @@ class Media {
   * -------- GET LIST --------
   ***************************/
 
-  public static function filterMedias( $title ) {
+  public static function showMedias( $title ) {
 
     // Open database connection
     $db   = init_db();
@@ -117,5 +117,32 @@ class Media {
         return $req->fetchAll();
   }
 
+
+    public static function filterMedias( $title,$genre=0,$symbolGenre='>',$releaseDate="2999-12-31",$symbolType = '!=',$type ) {
+
+        // Open database connection
+        $db   = init_db();
+        $req  = $db->prepare( "SELECT * FROM media WHERE title LIKE ? && genre_id $symbolGenre ? && release_date <= ? && type $symbolType ?  " );
+        $req->execute(array('%'.$title.'%',$genre,$releaseDate,'%'.$type.'%'));
+
+        // Close databse connection
+        $db   = null;
+
+        return $req->fetchAll();
+
+    }
+
+    public static function getTypeOfShow(){
+        // Open database connection
+        $db   = init_db();
+
+        $req  = $db->prepare( "SELECT * FROM genre " );
+        $req->execute();
+
+        // Close databse connection
+        $db   = null;
+
+        return $req->fetchAll();
+    }
 
 }

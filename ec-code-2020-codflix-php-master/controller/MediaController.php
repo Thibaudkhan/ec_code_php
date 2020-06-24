@@ -9,7 +9,8 @@ require_once( 'model/media.php' );
 function mediaPage() {
 
   $search = isset( $_GET['title'] ) ? $_GET['title'] : null;
-  $medias = Media::filterMedias( $search );
+  $medias = Media::showMedias( $search );
+  $AllType = Media::getTypeOfShow();
 
   require('view/mediaListView.php');
 
@@ -18,7 +19,6 @@ function mediaPage() {
 class MediaController {
 
     public  function showMoreDetails($search){
-        echo $search;
         $medias = Media::detailsPages($search);
         $distinctOptions = Media::detailsPages($search, "DISTINCT(season_series)");
         $TimeForSeries = Media::detailsPages($search,"SEC_TO_TIME( SUM( TIME_TO_SEC(time_of_show))) As timeSum");
