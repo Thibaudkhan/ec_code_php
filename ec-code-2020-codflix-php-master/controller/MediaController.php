@@ -35,10 +35,10 @@ function showMoreDetails($search){
 */
 function watchEpisode($id)
 {
-    //We use in the view $media and $historic
+    //We use $media and $historic in the view
     $medias = Media::showMedias($id);
-    $historics = historic::hisHistoric($id);
     historic::addToHistoric($medias);
+    $historics = historic::hisHistoric($id);
     require('view/mediaView.php');
 }
 

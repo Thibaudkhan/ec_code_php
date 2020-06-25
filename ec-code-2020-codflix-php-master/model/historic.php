@@ -33,6 +33,7 @@ class historic
         $db   = init_db();
         $today = date("Y-m-d H:i:s");
         $user_id =  $_SESSION['user_id'];
+
         //$media_id = $isUpdating ? $getTheRow : $getTheRow[0]['id'];
         //when the User leave the page update the historic
         if($isUpdating){
@@ -40,8 +41,14 @@ class historic
             $req  = $db->prepare( "Update  history SET finish_date = ?, watch_duration = ? Where user_id =? && media_id = ?" );
             $req->execute(array($today,$finish,$user_id,$media_id));
         }// When the user watch a video delete the row for this episode and insert him
-        else{
+        else{// quick fix Select and empty array
             $media_id = $getTheRow[0]['id'];
+            $reqSel  = $db->prepare( "Select * From history Where user_id= ? && media_id=? " );
+            $reqSel->execute(array($user_id,$media_id));
+            $red = $reqSel->fetchAll();
+            if(!empty($red)){
+                $finish = $red[0]['watch_duration'];
+            }
             $reqDel  = $db->prepare( "Delete From history Where user_id= ? && media_id=? " );
             $reqDel->execute(array($user_id,$media_id));
             $req  = $db->prepare( "INSERT INTO history(user_id, media_id, start_date, finish_date, watch_duration) VALUES (?,?,?,?,?) " );
