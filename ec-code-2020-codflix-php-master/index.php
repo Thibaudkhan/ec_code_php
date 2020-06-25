@@ -46,14 +46,11 @@ else:
 
   if( $user_id ):
       if(isset( $_GET['detailMedia'])){
-          $media = new MediaController();
             // call function to see more details
-          $media->showMoreDetails( $_GET['detailMedia']);
+          showMoreDetails( $_GET['detailMedia']);
 
       }elseif (isset( $_GET['media'])){
-          $media = new MediaController();
-
-          $media->watchEpisode($_GET['media']);
+          watchEpisode($_GET['media']);
 
       }
       else if(isset( $_GET['redirect'])){
@@ -99,7 +96,6 @@ else:
                   insertCurrentTimeWatching();
                   break;
 
-
           endswitch;
       }else if(isset($_GET['sendMail'])){
           sendMail();
@@ -109,7 +105,6 @@ else:
               case 'changePassword':
                   changePassword();
                   break;
-
 
               case 'changeEmail':
                   changeEmail();

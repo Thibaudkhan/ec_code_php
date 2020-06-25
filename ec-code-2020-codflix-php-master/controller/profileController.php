@@ -27,10 +27,6 @@ function changePassword(){
     }else{
         exit();
     }
-
-
-    //echo " pass ". $_SESSION['user_password'];
-
     if(User::myHash($oldPass,$user_email) == $_SESSION['user_password']){
         if( $newPass == $newPass2){
                 $user->changeProfile("Update user SET password =? Where id = ?",User::myHash($newPass,$user_email));
@@ -40,7 +36,6 @@ function changePassword(){
     }else{
         $message = "Ce n'est pas l'ancien mot de pass.";
     }
-
     echo $message;
     require('view/auth/profileView.php');
 }
@@ -50,6 +45,6 @@ function changeEmail(){
     if(!empty($_POST['email'])){
         $email = $_POST['email'];
         $user->changeProfile("Update user SET email =? Where id = ?",$email);
-
-    }require('view/auth/profileView.php');
+    }
+    require('view/auth/profileView.php');
 }

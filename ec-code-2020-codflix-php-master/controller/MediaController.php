@@ -15,24 +15,18 @@ function mediaPage() {
   require('view/mediaListView.php');
 
 }
-
-
-class MediaController {
-
-    public  function showMoreDetails($search){
+function showMoreDetails($search){
         $medias = Media::detailsPages($search);
         $distinctOptions = Media::detailsPages($search, "DISTINCT(season_series), title");
         $TimeForSeries = Media::detailsPages($search,"SEC_TO_TIME( SUM( TIME_TO_SEC(time_of_show))) As timeSum");
         require('view/detailsView.php');
     }
 
-    public function watchEpisode($id)
+function watchEpisode($id)
     {
         $medias = Media::showMedias($id);
         $historics = historic::hisHistoric($id);
         historic::addToHistoric($medias);
         require('view/mediaView.php');
-
     }
 
-}

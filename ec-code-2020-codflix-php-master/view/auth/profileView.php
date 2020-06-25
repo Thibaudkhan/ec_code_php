@@ -1,7 +1,6 @@
 <?php ob_start();
 
 ?>
-
 <div class="d-flex flex-column mt-5" >
     <div class="container-fluid p-2" style="margin-bottom: 13%;">
         <form class="form-inline" action="index.php?changeProfile=changePassword" method="post">
@@ -28,7 +27,6 @@
     <div class="container-fluid p-2" >
         <form class="form-inline" method="post" action="index.php?changeProfile=deleteAccount">
             <div class="form-group">
-
                 <label for="confirmPassword">Saisissez votre mot de passe pour supprimer </label>
                 <input type="password" name="confirmPassword" id="confirmPassword" class="form-control mx-sm-3" aria-describedby="passwordHelpInline">
                 <label class="mr-5" for="delete">Cliquer pour supprimer votre compte (cette action sera irréversible)</label>

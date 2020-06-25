@@ -52,19 +52,6 @@ class User {
     $this->password = $password;
   }
 
-    /**
-     * @param mixed $user_key
-     */
-
-
-    /**
-     * @param mixed $user_confirmed
-     */
-    public function setUserConfirmed($user_confirmed)
-    {
-        $this->user_confirmed = $user_confirmed;
-    }
-
   /***************************
   * -------- GETTERS ---------
   ***************************/
@@ -80,15 +67,6 @@ class User {
   public function getPassword() {
     return $this->password;
   }
-
-
-    /**
-     * @return mixed
-     */
-    public function getUserConfirmed()
-    {
-        return $this->user_confirmed;
-    }
 
 
 
@@ -124,16 +102,10 @@ class User {
   ***************************************/
 
   public static function getUserById( $id ) {
-
-    // Open database connection
     $db   = init_db();
-
     $req  = $db->prepare( "SELECT * FROM user WHERE id = ?" );
     $req->execute( array( $id ));
-
-    // Close databse connection
     $db   = null;
-
     return $req->fetch();
   }
 
@@ -142,16 +114,10 @@ class User {
   ****************************************/
 
   public function getUserByEmail() {
-
-    // Open database connection
     $db   = init_db();
-
     $req  = $db->prepare( "SELECT * FROM user WHERE user_confirmed = 1 && email = ?" );
     $req->execute( array( $this->getEmail()));
-
-    // Close databse connection
     $db   = null;
-
     return $req->fetch();
   }
 
@@ -185,6 +151,10 @@ EOT;
   }
 
 
+    /*
+       **   crypt the password with first a sha256  for the password and ripemd256 reverted for
+       **   the mail next too they are concatenated and give a single sha512 password.
+   */
     /**
      * @param $password
      * @param $email
@@ -201,10 +171,7 @@ EOT;
         $id = $_SESSION['user_id'];
         $req  = $db->prepare( $query );
         $req->execute( array($password,$id));
-
-        // Close databse connection
         $db   = null;
-
         return $req->fetch();
     }
 
@@ -213,10 +180,7 @@ EOT;
         $id = $_SESSION['user_id'];
         $req  = $db->prepare( "DELETE FROM history Where  history.user_id = ? ; DELETE FROM user Where user.id =?  ;" );
         $req->execute( array($id,$id));
-
-        // Close databse connection
         $db   = null;
-
         return $req->fetch();
     }
 

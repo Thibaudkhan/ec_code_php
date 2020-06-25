@@ -89,10 +89,7 @@ class Media {
   ***************************/
 
   public static function showMedias($id = 0,$query = "") {
-
-    // Open database connection
     $db   = init_db();
-
     if($id > 0){
         $req  = $db->prepare( "SELECT * FROM media WHERE id=? LIMIT 1" );
         $req->execute(array($id));
@@ -100,55 +97,35 @@ class Media {
         $req  = $db->prepare( $query );
         $req->execute();
     }
-
-
-    // Close databse connection
     $db   = null;
-
     return $req->fetchAll();
-
   }
 
     public static function detailsPages($title,$whatDistinct ="",$nbSeason=1)
     {
         $db   = init_db();
-
-            $req  = !empty($whatDistinct) ?  $db->prepare( "SELECT $whatDistinct FROM media WHERE title Like ? && season_series >= ?" )
-                : $db->prepare( "SELECT * FROM media WHERE title Like ? && season_series=?" );
-            $req->execute( array( '%' . $title . '%', $nbSeason ));
-
-
-        // Close databse connection
+        $req  = !empty($whatDistinct) ?  $db->prepare( "SELECT $whatDistinct FROM media WHERE title Like ? && season_series >= ?" )
+        : $db->prepare( "SELECT * FROM media WHERE title Like ? && season_series=?" );
+        $req->execute( array( '%' . $title . '%', $nbSeason ));
         $db   = null;
-
         return $req->fetchAll();
   }
 
 
     public static function filterMedias( $title,$genre=0,$symbolGenre='>',$releaseDate="2999-12-31",$symbolType = '!=',$type ) {
-
-        // Open database connection
         $db   = init_db();
         $req  = $db->prepare( "SELECT * FROM media WHERE title LIKE ? && genre_id $symbolGenre ? && release_date <= ? && type $symbolType ?  GROUP BY title" );
         $req->execute(array('%'.$title.'%',$genre,$releaseDate,'%'.$type.'%'));
-
-        // Close databse connection
         $db   = null;
-
         return $req->fetchAll();
 
     }
 
     public static function getTypeOfShow(){
-        // Open database connection
         $db   = init_db();
-
         $req  = $db->prepare( "SELECT * FROM genre " );
         $req->execute();
-
-        // Close databse connection
         $db   = null;
-
         return $req->fetchAll();
     }
 
@@ -156,10 +133,7 @@ class Media {
         $db   = init_db();
         $req  = $db->prepare( "SELECT * FROM media  where season_series =?  && title LIKE ?" );
         $req->execute(array($nbSeason,'%'.$title.'%'));
-
-        // Close databse connection
         $db   = null;
-
         return $req->fetchAll();
     }
 
@@ -167,10 +141,7 @@ class Media {
         $db   = init_db();
         $req  = $db->prepare($query);
         $req->execute();
-
-        // Close databse connection
         $db   = null;
-
         return $req->fetchAll();
     }
 

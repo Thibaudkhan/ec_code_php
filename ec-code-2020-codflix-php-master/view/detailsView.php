@@ -1,9 +1,5 @@
 <?php ob_start(); ?>
 
-<script>
-   
-</script>
-
 <div class="row">
     <h1 name="title" id="title2">Details de la page <?php echo $medias[0]['title'];?> </h1>
     <div class="form-group">
@@ -15,7 +11,6 @@
                 foreach( $distinctOptions as $option ){
                     echo '<option value="'.$option["season_series"].'">'.$option['season_series'].'</option>';
                 }
-
                 ?>
             </select>
             <button  class="btn btn-block bg-red">Valider</button>
@@ -24,7 +19,7 @@
 </div>
 <div class="container-fluid mb-3">
     <?php foreach( $TimeForSeries as $times ){
-   echo "Temps de visonage pour tous les épisodes de la série réunis <b>".$times['timeSum']."</b>";
+        echo "Temps de visonage pour tous les épisodes de la série réunis <b>".$times['timeSum']."</b>";
     }?>
 </div>
 <div class="media-list" id="tableResult">
@@ -33,8 +28,7 @@
             <div class="video">
                 <div>
                     <div  ></div>
-                    <iframe  id="player" allowfullscreen="" frameborder="0"
-                            src="<?= $media['trailer_url']; ?>" ></iframe>
+                    <iframe  id="player" allowfullscreen="" frameborder="0" src="<?= $media['trailer_url']; ?>" ></iframe>
                 </div>
             </div>
             <div id="title" class="title"><?= $media['title']; ?></div>
@@ -43,7 +37,6 @@
                 <p class="p-2" ><?= $media['name_of_episode']; ?></p>
                 <p class="p-2" ><?= $media['time_of_show']; ?></p>
             </div>
-
         </a>
     <?php endforeach; ?>
 </div>
