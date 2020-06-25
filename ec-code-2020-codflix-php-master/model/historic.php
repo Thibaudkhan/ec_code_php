@@ -6,16 +6,11 @@ class historic
 {
 
     public function filterMedias(  ) {
-
-        // Open database connection
         $db   = init_db();
         $user_id =  $_SESSION['user_id'];
         $req  = $db->prepare( "SELECT * FROM media Left Join history ON media.id = history.media_id WHERE  history.user_id=?" );
         $req->execute([$user_id]);
-
-        // Close databse connection
         $db   = null;
-
         return $req->fetchAll();
 
     }
@@ -24,16 +19,12 @@ class historic
         $db   = init_db();
         $req  = $db->prepare( "DELETE FROM history WHERE  id $symbol?" );
         $req->execute([$id]);
-
-        // Close databse connection
         $db   = null;
-
         return $req->fetchAll();
     }
 
     public static function addToHistoric($getTheRow,$finish = 1,$isUpdating = false)
     {
-
         $db   = init_db();
         $today = date("Y-m-d H:i:s");
         $user_id =  $_SESSION['user_id'];
@@ -49,12 +40,7 @@ class historic
             $req  = $db->prepare( "INSERT INTO history(user_id, media_id, start_date, finish_date, watch_duration) VALUES (?,?,?,?,?) " );
             $req->execute(array($user_id,$media_id,$today,$today,$finish));
         }
-
-
-
-        // Close databse connection
         $db   = null;
-
         return $req->fetchAll();
     }
 
@@ -62,13 +48,10 @@ class historic
     public static function hisHistoric($id)
     {
         $db   = init_db();
-
-            $req  = $db->prepare( "SELECT * FROM history WHERE media_id=? LIMIT 1" );
-            $req->execute(array($id));
-
-        // Close databse connection
+        $user_id =  $_SESSION['user_id'];
+        $req  = $db->prepare( "SELECT * FROM history WHERE media_id=? && user_id = ? LIMIT 1" );
+        $req->execute(array($id,$user_id));
         $db   = null;
-
         return $req->fetchAll();
     }
 
