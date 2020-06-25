@@ -92,6 +92,15 @@ else:
                   break;
 
           endswitch;
+      }else if(isset( $_GET['historic'])){
+          switch( $_GET['historic']):
+
+              case 'saveTime':
+                  insertCurrentTimeWatching();
+                  break;
+
+
+          endswitch;
       }else if(isset($_GET['sendMail'])){
           sendMail();
       }else if(isset($_GET['changeProfile'])){

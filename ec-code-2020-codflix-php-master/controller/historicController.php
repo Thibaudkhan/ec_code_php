@@ -18,3 +18,10 @@ function deleteHistoric($id){
     $medias = $historics->deleteHistoric($id,$symbol);
     showHistoric();
 }
+
+
+function insertCurrentTimeWatching(){
+    $saveTime = intval($_POST['saveTime']) ;
+    historic::addToHistoric( $_POST['getId'],$saveTime,true);
+
+}

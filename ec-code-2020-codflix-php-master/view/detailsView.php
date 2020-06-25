@@ -1,15 +1,7 @@
 <?php ob_start(); ?>
 
 <script>
-    function btn_click() {
-        //alert(title);
-
-        var season = document.getElementById("season");
-        var strseason = season.options[season.selectedIndex].value;
-        $("#tableResult").load("index.php?filter=searchSeason",{
-            season: strseason
-        });
-    }
+   
 </script>
 
 <div class="row">
@@ -26,7 +18,7 @@
 
                 ?>
             </select>
-            <button onclick="btn_click()" class="btn btn-block bg-red">Valider</button>
+            <button  class="btn btn-block bg-red">Valider</button>
         </form>
     </div>
 </div>

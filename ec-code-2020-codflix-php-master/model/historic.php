@@ -31,21 +31,23 @@ class historic
         return $req->fetchAll();
     }
 
-    public static function addToHistoric($getTheRow)
+    public static function addToHistoric($getTheRow,$finish = 1,$isUpdating = false)
     {
 
         $db   = init_db();
         $today = date("Y-m-d H:i:s");
-
-        $media_id = $getTheRow[0]['id'];
+        $media_id = $isUpdating ? $getTheRow : $getTheRow[0]['id'];
         $user_id =  $_SESSION['user_id'];
+        $reqDel  = $db->prepare( "Delete From history Where user_id= ? && media_id=? " );
+        $reqDel->execute(array($user_id,$media_id));
         $req  = $db->prepare( "INSERT INTO history(user_id, media_id, start_date, finish_date, watch_duration) VALUES (?,?,?,?,?) " );
-        $req->execute(array($user_id,$media_id,$today,$today,10));
+        $req->execute(array($user_id,$media_id,$today,$today,$finish));
 
         // Close databse connection
         $db   = null;
 
         return $req->fetchAll();
     }
+
 
 }

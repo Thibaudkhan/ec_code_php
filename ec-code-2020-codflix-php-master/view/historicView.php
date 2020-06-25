@@ -1,32 +1,34 @@
 <?php ob_start(); ?>
+<div style="height: 600px;overflow: scroll;">
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th style="width: 10%;text-align: center" scope="col">Titre</th>
+            <th style="width: 10%;text-align: center" scope="col">Durée</th>
+            <th style="width: 10%;text-align: center" scope="col">Description</th>
+            <th style="width: 50%;text-align: center" scope="col">url</th>
+            <th style="width: 20%;text-align: center" scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <?php foreach( $medias as $media ){
+                echo '<tr class="ligneTab">';
+                echo "<td >" . $media['title']."</td>";
+                echo "<td >" . $media['time_of_show']." </td>";
+                echo "<td >" . $media['short_description']." </td>";
+                echo "<td >" . $media['trailer_url']."</td>";
+                echo "<td><a href=\"index.php?deleteHistoric=".$media['id']."\">Delete</a></td>";
+                echo "</tr>";
+            }
+            ?>
 
-<table class="table">
-    <thead class="thead-dark">
-    <tr>
-        <th style="width: 10%;text-align: center" scope="col">Titre</th>
-        <th style="width: 10%;text-align: center" scope="col">Durée</th>
-        <th style="width: 10%;text-align: center" scope="col">Description</th>
-        <th style="width: 50%;text-align: center" scope="col">url</th>
-        <th style="width: 20%;text-align: center" scope="col">Delete</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <?php foreach( $medias as $media ){
-            echo '<tr class="ligneTab">';
-            echo "<td >" . $media['title']."</td>";
-            echo "<td >" . $media['time_of_show']." </td>";
-            echo "<td >" . $media['short_description']." </td>";
-            echo "<td >" . $media['trailer_url']."</td>";
-            echo "<td><a href=\"index.php?deleteHistoric=".$media['id']."\">Delete</a></td>";
-            echo "</tr>";
-        }
-        ?>
+        </tr>
 
-    </tr>
+        </tbody>
+    </table>
 
-    </tbody>
-</table>
+</div>
 
 <a href="index.php?deleteHistoric=0">Delete All</a>
 
