@@ -29,6 +29,7 @@ class MediaController {
     public function watchEpisode($id)
     {
         $medias = Media::showMedias($id);
+        $historics = historic::hisHistoric($id);
         historic::addToHistoric($medias);
         require('view/mediaView.php');
 

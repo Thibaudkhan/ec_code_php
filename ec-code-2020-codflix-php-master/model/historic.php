@@ -36,12 +36,21 @@ class historic
 
         $db   = init_db();
         $today = date("Y-m-d H:i:s");
-        $media_id = $isUpdating ? $getTheRow : $getTheRow[0]['id'];
         $user_id =  $_SESSION['user_id'];
-        $reqDel  = $db->prepare( "Delete From history Where user_id= ? && media_id=? " );
-        $reqDel->execute(array($user_id,$media_id));
-        $req  = $db->prepare( "INSERT INTO history(user_id, media_id, start_date, finish_date, watch_duration) VALUES (?,?,?,?,?) " );
-        $req->execute(array($user_id,$media_id,$today,$today,$finish));
+        //$media_id = $isUpdating ? $getTheRow : $getTheRow[0]['id'];
+        if($isUpdating){
+            $media_id = $getTheRow;
+            $req  = $db->prepare( "Update  history SET finish_date = ?, watch_duration = ? Where user_id =? && media_id = ?" );
+            $req->execute(array($today,$finish,$user_id,$media_id));
+        }else{
+            $media_id = $getTheRow[0]['id'];
+            $reqDel  = $db->prepare( "Delete From history Where user_id= ? && media_id=? " );
+            $reqDel->execute(array($user_id,$media_id));
+            $req  = $db->prepare( "INSERT INTO history(user_id, media_id, start_date, finish_date, watch_duration) VALUES (?,?,?,?,?) " );
+            $req->execute(array($user_id,$media_id,$today,$today,$finish));
+        }
+
+
 
         // Close databse connection
         $db   = null;
@@ -49,5 +58,18 @@ class historic
         return $req->fetchAll();
     }
 
+
+    public static function hisHistoric($id)
+    {
+        $db   = init_db();
+
+            $req  = $db->prepare( "SELECT * FROM history WHERE media_id=? LIMIT 1" );
+            $req->execute(array($id));
+
+        // Close databse connection
+        $db   = null;
+
+        return $req->fetchAll();
+    }
 
 }

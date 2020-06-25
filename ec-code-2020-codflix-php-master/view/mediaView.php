@@ -1,7 +1,6 @@
 <?php ob_start(); ?>
 
 
-<button style="margin-top: -20px;" id="sendInfo" onclick="sendInfo()">okk</button>
 
 <div  class="media-list personalMedia" id="tableResult">
 
@@ -15,21 +14,11 @@
             </div>
             <div  class="p-0 text-center text-white"><?= $media['release_date']; ?></div>
     <?php endforeach; ?>
+    <?php foreach( $historics as $historic ): ?>
+        <div style="display: none;" id="timeDuration"><?= $historic['watch_duration'] ?></div>
+    <?php endforeach; ?>
+
 </div>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
 <script>
     window.onload = function() {
         watch();
@@ -40,23 +29,20 @@
         return (match&&match[7].length==11)? match[7] : false;
     }
 
+    var oldPlayer = document.getElementById('oldPlayer');
+    var timeDuration = document.getElementById('timeDuration').textContent;
+    console.log(oldPlayer.textContent);
+    var idVideo = youtube_parser(oldPlayer.textContent);
+
+    var tag = document.createElement('script');
+
     function watch() {
-
-        var oldPlayer = document.getElementById('oldPlayer');
-        console.log(oldPlayer.textContent);
-        var idVideo = youtube_parser(oldPlayer.textContent);
-
-        var tag = document.createElement('script');
-
-
         tag.src = "https://www.youtube.com/iframe_api";
 
         var firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
         loadPlayer(idVideo);
-
-
 
     }
 
@@ -76,11 +62,13 @@
             events: {
                 'onReady': onPlayerReady,
                 'onStateChange': onPlayerStateChange
+
             }
         });
     }
     function onPlayerReady(event) {
-        event.target.playVideo();
+        event.target.loadVideoById(idVideo, timeDuration)
+        //event.target.playVideo();
     }
 
     function getPlayer(){
