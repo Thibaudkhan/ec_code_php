@@ -2,12 +2,11 @@
 
 require_once( 'model/user.php' );
 
-/****************************
-* ----- LOAD SIGNUP PAGE -----
-****************************/
 
-
-
+/*
+ * @param Take the mail and password from the form
+ * Check if the information are good and create an user with createUser function
+ */
 function signupPage()
 {
     $createUser = new user();
@@ -38,7 +37,3 @@ function signupPage()
 }
 
 
-
-/***************************
-* ----- SIGNUP FUNCTION -----
-***************************/

@@ -36,6 +36,7 @@ function login( $post ) {
 
   $error_msg      = "Email ou mot de passe incorrect";
   if( $userData && sizeof( $userData ) != 0 ):
+      //check if the password are the same crypting each other
     if( User::myHash($user->getPassword(),$user->getEmail())== $userData['password'] ):
       // Set session
         $_SESSION['user_id'] = $userData['id'];

@@ -14,6 +14,7 @@
     <div class="col-md-9 mb-md-0 mb-5">
         <form id="contact-form" name="contact-form" action="index.php?sendMail" method="POST">
             <div class="row">
+
                 <div class="col-md-6">
                     <div class="md-form mb-0">
                         <input type="text" id="name" name="name" class="form-control">
@@ -42,6 +43,7 @@
                         <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea"></textarea>
                         <label for="message">Votre message</label>
                     </div>
+
                 </div>
             </div>
         </form>

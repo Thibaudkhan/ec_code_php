@@ -4,7 +4,10 @@
 function showContact(){
     require('view/contactUsView.php');
 }
-
+/*
+ * @param Get the field for the mail
+ * send a mail to coding@gmail.com
+ */
 function sendMail(){
     if (!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['message']) && !empty($_POST['subject'])){
         $name = $_POST['name'];

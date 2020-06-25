@@ -124,6 +124,7 @@ class User {
 
     /**
      * @param $the_key
+     * send an email
      */
     public function emailConfirmation($the_key)
   {
@@ -151,13 +152,11 @@ EOT;
   }
 
 
-    /*
-       **   crypt the password with first a sha256  for the password and ripemd256 reverted for
-       **   the mail next too they are concatenated and give a single sha512 password.
-   */
+
     /**
-     * @param $password
-     * @param $email
+     * @param $password, $email
+     * crypt the password with first a sha256  for the password and ripemd256 reverted for
+     * the mail next too they are concatenated and give a single sha512 password.
      * @return string
      */
     public static function myHash($password, $email)
@@ -165,7 +164,10 @@ EOT;
         return hash('sha512',hash('sha256', $password) . strrev(hash('ripemd256',$email)));
     }
 
-
+    /**
+     * @param take a query from the controller and the password or id
+     * Update password or email for an user
+     */
     public function changeProfile($query,$password){
         $db   = init_db();
         $id = $_SESSION['user_id'];
@@ -175,6 +177,10 @@ EOT;
         return $req->fetch();
     }
 
+    /**
+     * Delete user and all his dependencies
+     * @return mixed
+     */
     public function deleteUser(){
         $db   = init_db();
         $id = $_SESSION['user_id'];

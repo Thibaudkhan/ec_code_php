@@ -1,7 +1,11 @@
 <?php
 
+/*
+ * @param Get the name of the serie and season
+ * Filter the season
+ */
 function chooseSeason(){
-    if(!empty($_POST['season'])&& !empty($_POST['seasonTitle'])){
+    if(!empty($_POST['season'])&& !empty($_POST['seriesTitle'])){
         $season = $_POST['season'];
         $title = $_POST['seasonTitle'];
         $medias = Media::getShowBySeason($season,$title);
@@ -10,7 +14,10 @@ function chooseSeason(){
         require('view/detailsView.php');
     }
 }
-
+/*
+ * @param Get the search form
+ * filter by genre, type of media,release Date etc..
+ */
 function resultFitlerAsc(){
     $symbol = 'LIKE';
     $symbolGenre = '=';

@@ -4,7 +4,7 @@
     <h1 name="title" id="title2">Details de la page <?php echo $medias[0]['title'];?> </h1>
     <div class="form-group">
         <form method="post" action="index.php?filter=searchSeason">
-            <input style="display: none;" name="seasonTitle" value="<?php echo $medias[0]['title'];?>" readonly>
+            <input style="display: none;" name="seriesTitle" value="<?php echo $medias[0]['title'];?>" readonly>
             <label for="exampleFormControlSelect1">Example select</label>
             <select  name="season" class="form-control" id="season">
                 <?php

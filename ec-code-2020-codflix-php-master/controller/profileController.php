@@ -5,7 +5,10 @@ function showProfilePage(){
     $email =  $_SESSION['user_email'];
     require('view/auth/profileView.php');
 }
-
+/*
+ * @arg Get the email and password form
+ * Check if the current password are the right and call delete user function
+ */
 function deleteUser(){
     if(!empty($_POST['confirmPassword'])){
         $user = new User();
@@ -16,6 +19,11 @@ function deleteUser(){
     }require('view/auth/profileView.php');
 }
 
+/*
+ * @param Get the email and the password
+ * Check if the current password and the write are the right and some other verification
+ * Call the password change function
+ */
 function changePassword(){
     $user = new User();
     $message= "";
@@ -40,6 +48,10 @@ function changePassword(){
     require('view/auth/profileView.php');
 }
 
+/*
+ * @arg Get the email field
+ * Write de new email calling a function
+ */
 function changeEmail(){
     $user = new User();
     if(!empty($_POST['email'])){

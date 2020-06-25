@@ -1,6 +1,10 @@
 <?php
 require_once( '../model/database.php' );
 
+/*
+ * Allow the mail confirmation taking the key sended in the mail
+ */
+
 if(isset($_GET['user_key'])){
     $db   = init_db();
     $user_key = $_GET['user_key'];
