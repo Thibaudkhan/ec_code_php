@@ -37,6 +37,8 @@
                 <p class="p-2" ><?= $media['name_of_episode']; ?></p>
                 <p class="p-2" ><?= $media['time_of_show']; ?></p>
             </div>
+            <div id="title" class="title"><?= "episode " .$media['current_episode']; ?></div>
+
         </a>
     <?php endforeach; ?>
 </div>
