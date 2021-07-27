@@ -1,0 +1,16 @@
+
+
+.personalMedia iframe{
+    position: fixed;
+    width: 87%!important;
+    height: 87%;
+    margin-top: -28px;
+    margin-left: -28px;
+}
+
+@media (max-width: 991.98px){
+    .personalMedia iframe {
+        width: 100%!important;
+    }
+
+}

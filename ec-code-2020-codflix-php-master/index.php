@@ -4,6 +4,10 @@ require_once( 'controller/homeController.php' );
 require_once( 'controller/loginController.php' );
 require_once( 'controller/signupController.php' );
 require_once( 'controller/mediaController.php' );
+require_once( 'controller/historicController.php' );
+require_once( 'controller/FilterController.php' );
+require_once( 'controller/contactController.php' );
+require_once( 'controller/profileController.php' );
 
 /**************************
 * ----- HANDLE ACTION -----
@@ -32,6 +36,8 @@ if ( isset( $_GET['action'] ) ):
 
     break;
 
+
+
   endswitch;
 
 else:
@@ -39,9 +45,84 @@ else:
   $user_id = isset( $_SESSION['user_id'] ) ? $_SESSION['user_id'] : false;
 
   if( $user_id ):
-    mediaPage();
+      if(isset( $_GET['detailMedia'])){
+            // call function to see more details
+          showMoreDetails( $_GET['detailMedia']);
+
+      }elseif (isset( $_GET['media'])){
+          watchEpisode($_GET['media']);
+
+      }
+      else if(isset( $_GET['redirect'])){
+          switch( $_GET['redirect']):
+
+              case 'index':
+                  mediaPage();
+              break;
+
+              case 'contact':
+                  showContact();
+              break;
+
+              case 'historic':
+                  showHistoric();
+
+              break;
+
+              case 'profile':
+                  showProfilePage();
+
+              break;
+
+          endswitch;
+      }else if( isset($_GET['deleteHistoric'])){
+          deleteHistoric($_GET['deleteHistoric']);
+      }else if(isset( $_GET['filter'])){
+          switch( $_GET['filter']):
+
+              case 'ascSearch':
+                  resultFitlerAsc();
+                  break;
+
+              case 'searchSeason':
+                  chooseSeason();
+                  break;
+
+          endswitch;
+      }else if(isset( $_GET['historic'])){
+          switch( $_GET['historic']):
+
+              case 'saveTime':
+                  insertCurrentTimeWatching();
+                  break;
+
+          endswitch;
+      }else if(isset($_GET['sendMail'])){
+          sendMail();
+      }else if(isset($_GET['changeProfile'])){
+          switch( $_GET['changeProfile']):
+
+              case 'changePassword':
+                  changePassword();
+                  break;
+
+              case 'changeEmail':
+                  changeEmail();
+                  break;
+
+              case 'deleteAccount':
+                  deleteUser();
+
+                  break;
+
+          endswitch;
+      }
+      else{
+          mediaPage();
+      }
   else:
     homePage();
   endif;
 
 endif;
+
