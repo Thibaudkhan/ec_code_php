@@ -7,5 +7,6 @@
 1. Import the database `codflix.sql`
 1. Pull the repo in the `www/` directory of your local server
 1. Follow the address of your repo. For example, if your repo is in ``www/codflix/``, the URL should be http://localhost/codflix or http://127.0.0.1/codflix
+1. Use user coding@gmail.com and password 123456 to be connected
 
 Nothing else is required. You can now start your development
